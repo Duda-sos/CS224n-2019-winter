@@ -13,6 +13,10 @@
 3. 尝试做assignment2, 先做在看答案
 4. 点个赞
 
+**本章大纲：**
+
+![image-20210226165143073](C:\Users\95152\AppData\Roaming\Typora\typora-user-images\image-20210226165143073.png)
+
 ## 1. 如何表示文字意思
 
 ### 1.1 同义词表示
