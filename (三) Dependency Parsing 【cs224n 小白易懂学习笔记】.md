@@ -12,25 +12,64 @@
 2. 把assignment3做完（本人做的是2020版的）
 3. 点个赞
 
+本节大纲：
+
+
+
 ---
+
+
 
 ## 1. 为什么要句法分析
 
-
+* 我们需要理解句子的结构，这样才能更好更正确地解释语言
+* NLP中解析句子的结构有两种：短语结构和依存结构
 
 ## 2. 什么是依存句法分析
 
+### 2.1 依存结构
+
+* 句⼦的依存结构展示了单词依赖于另外⼀个单词（修饰或者是参数）。词与词之间的⼆元⾮对称关系称为依存关系，描述为从 head（被修饰的主题）⽤箭头指向 dependent （修饰语）。⼀般这些依存关系形成树结构。他们通常⽤语法关系的名称（主体，介词宾语，同位语等）。⼀个依存树的例⼦如下图所示：
+
+  ![image-20210308001210057](../github/image/image-20210308001210057.png)
+
+### 2.2 基于转移的句法分析
+
+* 详细的定义如下：（建议照着例子来看）
+
+  ![image-20210308001507587](../github/image/image-20210308001507587.png)
+
+* 例子1：教程中的 “I ate fish”
+
+* 例子2：[5.3  Neural Transition-Based Dependency Parsing](#jump)
+
+## 3. 基于神经网络的依存句法分析
+
+* 把3种输入特征转换为词向量
+  * stack和buffer中的单词及其dependent word
+  * 单词的part-of-speech tag
+  * 描述语法关系的arc label
+* 将它们联结起来作为输⼊层，再经过若⼲⾮线性的隐藏层，最后加⼊softmaxlayer得到shift-reduce解析器的动作（即shift\LA\RA）
+
+![image-20210308155132238](../github/image/image-20210308155132238.png)
+
+* 模型结构
+
+  ![image-20210308160233693](../github/image/image-20210308160233693.png)
+
+* 评价标准
+  * Unlabeled attachment score (UAS) = head
+  * Labeled attachment score (LAS) = head and label
+
+## 4. 基于pytorch的词窗口分类
+
+下面是我对2021年中对pytorch的tutorial进行的翻译，读完之后对assignment3的完成会有很大帮助
 
 
-## 3. 基于pytorch的词窗口分类
 
-下面是我对2021年中对pytorch的tutorial进行的翻译，读完之后对assignment3有很大帮助哦
+## 5. assignment 3
 
-
-
-## 4. assignment 3
-
-### 4.1 Adam Optimizer
+### 5.1 Adam Optimizer
 
 * ![image-20210302154534955](D:\Learning\nlp\cs224n\github\image\image-20210302154534955.png)
 
@@ -47,7 +86,7 @@
   * q1: 在神经网络中，需要被更新的参数其实就是w 和 b, 所以其中一个参数的变化量相对小的化，那么他就会得到“larger updates”
   * q2: 通过这个，一方面，可以使得变化量大，即有较大震荡的参数，更新得更加平滑；另一方面，变化量小，梯度较缓和的，可以增大梯度。从而达到快速且平稳的下降。
 
-### 4.2 Dropout
+### 5.2 Dropout
 
 * ![image-20210302160915804](D:\Learning\nlp\cs224n\github\image\image-20210302160915804.png)
 
@@ -60,7 +99,7 @@
 
 ---
 
-### 4.3  Neural Transition-Based Dependency Parsing
+### 5.3 Neural Transition-Based Dependency Parsing<a name="jump"></a>
 
 ![image-20210302192442611](../github/image/image-20210302192442611.png)
 
@@ -82,7 +121,13 @@
 
 ​	包含nn个单词的句子需要 2×n步才能完成解析。因为需要进行 n 步的 SHIFTSHIFT 操作和 共计n 步的 LEFT-ARC 或 RIGHT-ARC 操作，才能完成解析。（每个单词都需要一次SHIFT和ARC的操作，初始化步骤不计算在内）
 
-## 5. 参考资料
+### 5.4 代码部分
+
+
+
+## 6. 参考资料
 
 1. [CS224n-2019 笔记列表](https://zhuanlan.zhihu.com/p/68502016)
 2. [CS224n-winter-together](https://github.com/Duda-sos/CS224n-winter-together)
+
+### 
